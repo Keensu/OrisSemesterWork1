@@ -1,0 +1,507 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f9e0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+}
+
+/* Шапка */
+header {
+    background: white;
+    border-bottom: 2px solid #ff8c00;
+    padding: 15px 0;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .logo span {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+.header-nav {
+    display: flex;
+    gap: 15px;
+}
+
+    .header-nav a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 4px;
+    }
+
+        .header-nav a:hover,
+        .header-nav a.active {
+            background: #ff8c00;
+            color: white;
+        }
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* === Форма авторизации в шапке === */
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    min-width: 220px;
+}
+
+.auth-form {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    width: 100%;
+}
+
+    .auth-form input {
+        padding: 6px 10px;
+        font-size: 13px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        flex: 1;
+    }
+
+        .auth-form input[type="text"] {
+            width: 100px;
+        }
+
+        .auth-form input[type="password"] {
+            width: 100px;
+        }
+
+.btn-login {
+    padding: 6px 12px;
+    font-size: 13px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+    .btn-login:hover {
+        background: #0056b3;
+    }
+
+.auth-links {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.register-link,
+.forgot-link {
+    font-size: 12px;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+    .register-link:hover,
+    .forgot-link:hover {
+        text-decoration: none;
+    }
+
+
+/* Главный контент */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Поиск */
+.search-box {
+    background: #9acd32;
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+}
+
+    .search-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group button {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .form-group .btn-search {
+        background: #ff8c00;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+        .form-group .btn-search:hover {
+            background: #e67700;
+        }
+
+
+/* Блок преимуществ */
+.advantages {
+    margin-top: 30px;
+}
+
+    .advantages h2 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+    .advantages ul {
+        list-style: none;
+    }
+
+    .advantages li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+        .advantages li::before {
+            content: "✓";
+            color: #007bff;
+            font-weight: bold;
+        }
+
+/* Популярные направления */
+.popular-destinations {
+    margin-top: 30px;
+}
+
+    .popular-destinations h2 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+.destinations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.destination-item {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+    .destination-item h3 {
+        color: #007bff;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    .destination-item p {
+        font-size: 13px;
+        color: #666;
+    }
+
+/* Отели */
+.hotels-section {
+    margin-top: 30px;
+}
+
+    .hotels-section h2 {
+        color: #555;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+.hotel-card {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: #fafafa;
+}
+
+.hotel-image {
+    width: 120px;
+    height: 80px;
+    background: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.hotel-info {
+    flex: 1;
+}
+
+    .hotel-info h3 {
+        color: #007bff;
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+    .hotel-info .stars {
+        color: #ffc107;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .hotel-info p {
+        font-size: 13px;
+        color: #666;
+        margin: 3px 0;
+    }
+
+.hotel-price {
+    text-align: right;
+    font-weight: bold;
+    color: #007bff;
+    font-size: 16px;
+}
+
+.hotel-button {
+    background: #9acd32;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+    .hotel-button:hover {
+        background: #8bbd2f;
+    }
+
+/* Футер */
+footer .footer-content {
+    background: #f8f8f8;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.footer-column h3 {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-column p {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+    .footer-column a:hover {
+        text-decoration: underline;
+    }
+
+/* === Стили для "Показать больше" === */
+.show-more-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+    .show-more-link:hover {
+        color: #0056b3;
+    }
+
+.countries-visible,
+.countries-hidden {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+    .countries-hidden div,
+    .countries-visible div {
+        font-size: 12px;
+    }
+
+    .countries-hidden a,
+    .countries-visible a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .countries-hidden a:hover,
+        .countries-visible a:hover {
+            text-decoration: underline;
+        }
+
+.countries-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.country-item {
+    font-size: 12px;
+}
+
+    .country-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .country-item a:hover {
+            text-decoration: underline;
+        }
+
+    .country-item small {
+        color: #666;
+        display: block;
+        font-size: 11px;
+    }
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 11px;
+    color: #666;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .header-top {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .search-box {
+        padding: 15px;
+    }
+
+    .auth-section {
+        align-items: center;
+        min-width: auto;
+    }
+
+    .auth-form {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .auth-form input {
+            width: 140px !important;
+            text-align: center;
+        }
+
+    .btn-login {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .auth-links {
+        justify-content: center;
+    }
+
+    /* Адаптив для стран */
+    .countries-visible,
+    .countries-hidden {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .hotel-card {
+        flex-direction: column;
+    }
+
+    .hotel-image {
+        width: 100%;
+        height: 100px;
+    }
+}
