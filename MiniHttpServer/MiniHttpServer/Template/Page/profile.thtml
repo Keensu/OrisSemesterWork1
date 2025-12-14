@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя — ВашОтель.RU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-header h2 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .profile-header p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+
+        .profile-body {
+            padding: 25px;
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+        }
+
+        .info-group h3 {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-group h3::before {
+            content: "•";
+            color: #007bff;
+            font-size: 20px;
+            margin-right: 8px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: #222;
+            word-break: break-word;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .badge-admin {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .badge-user {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .status-verified {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .status-not-verified {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed #eee;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .profile-header h2 {
+                font-size: 20px;
+            }
+
+            .info-value {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>👤 Личный кабинет</h1>
+            <p>Информация о вашей учётной записи</p>
+        </header>
+
+        <div class="profile-card">
+            <div class="profile-header">
+                <h2>${User.UserName}</h2>
+                <p>ID пользователя: ${User.Id}</p>
+            </div>
+
+            <div class="profile-body">
+                <div class="info-group">
+                    <h3>Электронная почта</h3>
+                    <div class="info-value">${User.Email}</div>
+                </div>
+
+                <div class="info-group">
+                    <h3>Телефон</h3>
+                    <div class="info-value">
+                        $if (User.Phone)
+                            ${User.Phone}
+                        $else
+                            <span style="color: #888;">Не указан</span>
+                        $endif
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <h3>Роль</h3>
+                    <div class="info-value">
+                        $if (User.Role == "admin")
+                            Администратор <span class="badge badge-admin">ADMIN</span>
+                        $else
+                            Пользователь <span class="badge badge-user">USER</span>
+                        $endif
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <h3>Верификация</h3>
+                    <div class="info-value">
+                        $if (User.IsVerified)
+                            <span class="status-verified">✅ Подтверждён</span>
+                        $else
+                            <span class="status-not-verified">❌ Не подтверждён</span>
+                        $endif
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <h3>Дата регистрации</h3>
+                    <div class="info-value">${User.DateRegistered}</div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a href="/home" class="btn">← Вернуться на главную</a>
+                <div>
+                    <a href="/users" class="back-link">📋 Список всех пользователей</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

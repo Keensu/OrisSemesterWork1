@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список отелей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        .hotels-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hotel-card {
+            background: white;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hotel-info {
+            flex: 1;
+        }
+        .hotel-info p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+        .hotel-info strong {
+            font-size: 16px;
+            color: #007bff;
+        }
+        .stars {
+            color: #ffc107;
+            font-weight: bold;
+        }
+        .actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+        }
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        .location {
+            color: #555;
+            font-size: 13px;
+        }
+        .contact {
+            font-size: 13px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="hotels-container">
+        <h1>🏨 Список отелей</h1>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/home">Вернуться на главную</a>
+        </div>
+
+        $if (Hotels)
+            $foreach (var Hotel in Hotels)
+            <div class="hotel-card">
+                <div class="hotel-info">
+                    <p><strong>${Hotel.Name}</strong> (ID: ${Hotel.Id})</p>
+                    <p class="location">📍 ${Hotel.Address}, ${Hotel.City}, ${Hotel.Country}</p>
+                    <p>⭐ Рейтинг: <span class="stars">${Hotel.Stars} из 5</span></p>
+                    <p class="contact">📞 Телефон: ${Hotel.Phone}</p>
+                    <p class="contact">✉️ Email: ${Hotel.Email}</p>
+                    <p>📋 Описание: ${Hotel.Description}</p>
+                </div>
+                <div class="actions">
+                    <a href="/rooms/${Hotel.Id}">Номера</a>
+                </div>
+            </div>
+            $endfor
+        $else
+            <div class="empty">Отели не найдены.</div>
+        $endif
+
+        
+    </div>
+</body>
+</html>

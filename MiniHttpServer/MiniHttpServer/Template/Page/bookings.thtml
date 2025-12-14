@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои бронирования</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .booking-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background-color: #fafafa;
+            transition: box-shadow 0.2s;
+        }
+
+        .booking-item:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .booking-details {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .booking-price {
+            font-size: 16px;
+            color: #28a745;
+            font-weight: bold;
+            margin: 6px 0;
+        }
+
+        .booking-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .booking-status.confirmed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .booking-status.cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .booking-actions {
+            margin-top: 12px;
+        }
+
+        .booking-actions button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .booking-actions button:hover {
+            background-color: #c82333;
+        }
+
+        .no-bookings {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 20px 0;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Мои бронирования</h1>
+
+        $if (Bookings)
+            $foreach (var b in Bookings)
+            <div class="booking-item">
+                <div class="booking-header">${b.HotelName} — ${b.RoomName}</div>
+                <div class="booking-details">
+                    <div>Заезд: ${b.CheckInDate}, Выезд: ${b.CheckOutDate}</div>
+                    <div class="booking-price">Цена: ${b.TotalPrice} руб.</div>
+                    <div>
+                        Статус: 
+                        <span class="booking-status ${b.Status?.ToLower()}">${b.Status}</span>
+                    </div>
+                </div>
+
+                $if (b.Status == "cancelled")
+                $else
+                <div class="booking-actions">
+                    <form method="post" action="/bookings/cancel" style="display:inline;">
+                        <input type="hidden" name="id" value="${b.Id}" />
+                        <button type="submit" onclick="return confirm('Отменить бронирование?')">
+                            Отменить
+                        </button>
+                    </form>
+                </div>
+                $endif
+            </div>
+            $endfor
+        $else
+            <p class="no-bookings">Бронирований нет.</p>
+        $endif
+
+        <a href="/home" class="home-link">← Главная</a>
+    </div>
+</body>
+</html>

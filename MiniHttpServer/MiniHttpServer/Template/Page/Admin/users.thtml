@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Пользователи — Админка</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
+        h1 { color: #007bff; margin-bottom: 15px; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            background: white; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        th, td { 
+            padding: 12px 15px; 
+            text-align: left; 
+            border-bottom: 1px solid #eee; 
+        }
+        th { 
+            background: #f1f3f9; 
+            font-weight: bold; 
+            color: #333; 
+        }
+        tr:last-child td { 
+            border-bottom: none; 
+        }
+        .role-admin { 
+            background: #f8d7da; 
+            color: #721c24; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .role-user { 
+            background: #d1ecf1; 
+            color: #0c5460; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .back-link { 
+            display: inline-block; 
+            margin-top: 20px; 
+            color: #007bff; 
+            text-decoration: none; 
+        }
+    </style>
+</head>
+<body>
+    <h1>👥 Пользователи</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Логин</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Роль</th>
+                <th>Зарегистрирован</th>
+            </tr>
+        </thead>
+        <tbody>
+            $foreach (var user in Users)
+            <tr>
+                <td>${user.Id}</td>
+                <td>${user.UserName}</td>
+                <td>${user.Email}</td>
+                <td>${user.Phone}</td>
+                <td>
+                    $if (user.Role == "admin")
+                        <span class="role-admin">Админ</span>
+                    $else
+                        <span class="role-user">Пользователь</span>
+                    $endif
+                </td>
+                <td>${user.DateRegistered}</td>
+            </tr>
+            $endfor
+        </tbody>
+    </table>
+
+    <a href="/admin" class="back-link">← Назад в админку</a>
+</body>
+</html>

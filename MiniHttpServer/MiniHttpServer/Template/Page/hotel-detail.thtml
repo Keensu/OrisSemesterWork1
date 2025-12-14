@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отель ${Hotel.Name}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f7e0, #f0f9e0);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .hotel-detail {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .hotel-header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hotel-header h1 {
+            font-size: 28px;
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .stars {
+            font-size: 20px;
+            color: #ffc107;
+            margin-bottom: 12px;
+        }
+
+        .info-section p {
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .info-section strong {
+            color: #007bff;
+            margin-right: 6px;
+        }
+
+        .description {
+            background: #f9f9f9;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+        }
+
+        .description strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #007bff;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s;
+            text-align: center;
+            flex: 1 1 auto;
+            min-width: 140px;
+        }
+
+        .actions a:nth-child(2) {
+            background: #6c757d;
+        }
+
+        .actions a:nth-child(3) {
+            background: #28a745;
+        }
+
+        .actions a:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .hotel-detail {
+                padding: 20px 16px;
+            }
+
+            .hotel-header h1 {
+                font-size: 24px;
+            }
+
+            .actions a {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hotel-detail">
+        <div class="hotel-header">
+            <h1>${Hotel.Name}</h1>
+            <p class="stars">⭐ ${Hotel.Stars} из 5</p>
+        </div>
+
+        <div class="info-section">
+            <p><strong>Адрес:</strong> ${Hotel.Address}, ${Hotel.City}, ${Hotel.Country}</p>
+            <p><strong>Телефон:</strong> ${Hotel.Phone}</p>
+            <p><strong>Email:</strong> ${Hotel.Email}</p>
+        </div>
+
+        <div class="description">
+            <strong>Описание:</strong>
+            <span>${Hotel.Description}</span>
+        </div>
+
+        <!-- Исправлена ошибка в href и кавычках -->
+        <div class="actions">
+            <a href="/hotels">← К списку отелей</a>
+            <a href="/home">← На главную</a>
+            <a href="/rooms/${Hotel.Id}">Номера в отеле →</a>
+        </div>
+    </div>
+</body>
+</html>

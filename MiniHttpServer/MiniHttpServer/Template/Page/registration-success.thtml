@@ -1,0 +1,73 @@
+﻿<!DOC<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация успешна</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .user-id {
+            background: #e9f7ef;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 15px 0;
+            display: inline-block;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Регистрация прошла успешно!</h1>
+        <p>Ваш аккаунт создан и готов к использованию.</p>
+
+        $if (UserId)
+        <p>Ваш идентификатор пользователя:</p>
+        <div class="user-id">${UserId}</div>
+        $endif
+
+        <a href="/users/get">Перейти к списку пользователей</a>
+    </div>
+</body>
+</html>

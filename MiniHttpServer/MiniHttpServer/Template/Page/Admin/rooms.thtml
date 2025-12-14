@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Номера — Админка</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f8f9fa; }
+        h1 { color: #007bff; margin-bottom: 15px; }
+        .top-actions { margin-bottom: 15px; }
+        .top-actions a { 
+            display: inline-block; 
+            padding: 8px 15px; 
+            background: #28a745; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 4px; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            background: white; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            border-radius: 8px; 
+            overflow: hidden; 
+        }
+        th, td { 
+            padding: 12px 15px; 
+            text-align: left; 
+            border-bottom: 1px solid #eee; 
+        }
+        th { 
+            background: #f1f3f9; 
+            font-weight: bold; 
+            color: #333; 
+        }
+        tr:last-child td { 
+            border-bottom: none; 
+        }
+        .actions a { 
+            margin-right: 10px; 
+            text-decoration: none; 
+            font-size: 14px; 
+        }
+        .edit { color: #007bff; }
+        .delete { color: #dc3545; }
+        .status { 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 12px; 
+            font-weight: bold; 
+        }
+        .status-available { 
+            background: #d4edda; 
+            color: #155724; 
+        }
+        .status-unavailable { 
+            background: #f8d7da; 
+            colored: #721c24; 
+        }
+        .back-link { 
+            display: inline-block; 
+            margin-top: 20px; 
+            color: #007bff; 
+            text-decoration: none; 
+        }
+    </style>
+</head>
+<body>
+    <h1>🛏️ Номера</h1>
+    
+    <div class="top-actions">
+        <a href="/admin/rooms/create">➕ Добавить номер</a>
+        <a href="/admin" style="background: #40E0D0;">Вернуться на главную</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Отель</th>
+                <th>Тип номера</th>
+                <th>Цена/ночь</th>
+                <th>Вместимость</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            $foreach (var room in Rooms)
+            <tr>
+                <td>${room.Id}</td>
+                <td>${room.HotelName}</td>
+                <td>${room.RoomType}</td>
+                <td>${room.PricePerNight} руб.</td>
+                <td>${room.Capacity} чел.</td>
+                <td>
+                    <span class="status $if (room.IsAvailable) status-available $else status-unavailable $endif">
+                        $if (room.IsAvailable) Доступен $else Занят $endif
+                    </span>
+                </td>
+                <td class="actions">
+                    <a href="/admin/rooms/edit?id=${room.Id}" class="edit">✏️ Изменить</a>
+                   <a href="#" class="delete" onclick="deleteRoom(${room.Id}); return false;">🗑️ Удалить</a>
+                </td>
+            </tr>
+            $endfor
+        </tbody>
+    </table>
+
+    <a href="/admin" class="back-link">← Назад в админку</a>
+
+    <script>
+function deleteRoom(roomId) {
+    if (confirm('Удалить номер ' + roomId + '?')) {
+        fetch('/admin/rooms/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'id=' + roomId
+        })
+        .then(res => {
+            if (res.ok) {
+                location.reload();
+            } else {
+                return res.text().then(text => {
+                    alert('Ошибка: ' + text);
+                });
+            }
+        })
+        .catch(err => {
+            alert('Ошибка сети: ' + err.message);
+        });
+    }
+}
+</script>
+</body>
+</html>

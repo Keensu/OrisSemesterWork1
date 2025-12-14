@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Номера в отеле</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .room-type {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .room-price {
+            font-size: 1.2rem;
+            color: #e74c3c;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .room-detail {
+            display: flex;
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .room-detail strong {
+            min-width: 100px;
+            color: #2c3e50;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .no-rooms {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Номера в отеле ${HotelName}</h1>
+            <div class="subtitle">Выберите подходящий номер для комфортного проживания</div>
+        </header>
+
+        $if (Rooms)
+            <div class="rooms-grid">
+                $foreach (var Room in Rooms)
+                <div class="room-card">
+                    <div class="room-type">${Room.RoomType}</div>
+                    <div class="room-price">${Room.PricePerNight} руб./ночь</div>
+                    <div class="room-detail">
+                        <strong>Вместимость:</strong> ${Room.Capacity} чел.
+                    </div>
+                    <div class="room-detail">
+                        <strong>Удобства:</strong> ${Room.Amenities}
+                    </div>
+                    <a href="/rooms/get/${Room.Id}" class="btn">Подробнее</a>
+                </div>
+                $endfor
+            </div>
+        $else
+            <div class="no-rooms">
+                <p>Номера не найдены.</p>
+            </div>
+        $endif
+
+        <a href="/hotels/get/${HotelId}" class="back-link">← Назад к отелю</a>
+    </div>
+</body>
+</html>

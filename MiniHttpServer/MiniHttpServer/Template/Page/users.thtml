@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список пользователей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        .users-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .user-card {
+            background: white;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-info {
+            flex: 1;
+        }
+        .user-info p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+        .user-info strong {
+            font-size: 16px;
+            color: #007bff;
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-admin {
+            background-color: #dc3545;
+            color: white;
+        }
+        .badge-user {
+            background-color: #28a745;
+            color: white;
+        }
+        .actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+        }
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="users-container">
+        <h1>👥 Список пользователей</h1>
+
+        $if (Users)
+            $foreach (var User in Users)
+            <div class="user-card">
+                <div class="user-info">
+                    <p><strong>${User.UserName}</strong> (ID: ${User.Id})</p>
+                    <p>📧 Email: ${User.Email}</p>
+                    <p>📱 Телефон: ${User.Phone}</p>
+                    <p>📅 Зарегистрирован: ${User.DateRegistered}</p>
+                    <p>
+                        Роль: 
+                        $if (User.Role == "admin")
+                            <span class="badge badge-admin">Администратор</span>
+                        $else
+                            <span class="badge badge-user">Пользователь</span>
+                        $endif
+                        | 
+                        Верификация: 
+                        $if (User.IsVerified)
+                            <span style="color: green;">✅ Подтверждён</span>
+                        $else
+                            <span style="color: red;">❌ Не подтверждён</span>
+                        $endif
+                    </p>
+                </div>
+                <div class="actions">
+                    <a href="/users/get/${User.Id}">Подробнее</a>
+                </div>
+            </div>
+            $endfor
+        $else
+            <div class="empty">Пользователи не найдены.</div>
+        $endif
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/">Регистрация</a>
+        </div>
+    </div>
+
+</body>
+</html>

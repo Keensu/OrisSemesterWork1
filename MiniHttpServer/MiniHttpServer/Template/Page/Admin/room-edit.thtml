@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать номер — Админка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-group input {
+            width: auto;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .delete-btn {
+            background: #dc3545;
+            margin-left: 10px;
+        }
+        .delete-btn:hover {
+            background: #c82333;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ Редактировать номер: ${Room.RoomType}</h1>
+        <!-- ВАЖНО: action без {id} в URL -->
+        <form method="post" action="/admin/rooms/edit">
+            <!-- Скрытые поля: ID и IsAvailable (для корректной работы bool) -->
+            <input type="hidden" name="Id" value="${Room.Id}" />
+            <input type="hidden" name="IsAvailable" value="false" />
+
+            <div class="form-group">
+    <label for="hotel">Отель *</label>
+    <select id="hotel" name="HotelId" required>
+        ${HotelsHtml}
+    </select>
+</div>
+
+            <div class="form-group">
+                <label for="roomType">Тип номера *</label>
+                <input type="text" id="roomType" name="RoomType" value="${Room.RoomType}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Цена за ночь (руб.) *</label>
+                <input type="number" id="price" name="PricePerNight" value="${Room.PricePerNight}" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="capacity">Вместимость (человек) *</label>
+                <input type="number" id="capacity" name="Capacity" value="${Room.Capacity}" min="1" max="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="area">Площадь (м²)</label>
+                <input type="text" id="area" name="Area" value="${Room.Area}">
+            </div>
+
+            <div class="form-group">
+                <label for="amenities">Удобства</label>
+                <input type="text" id="amenities" name="Amenities" value="${Room.Amenities}">
+            </div>
+
+            <div class="form-group">
+                <label for="bedType">Тип кровати</label>
+                <input type="text" id="bedType" name="BedType" value="${Room.BedType}">
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="isAvailable" name="IsAvailable" value="true" $if (Room.IsAvailable) checked $endif>
+                    <label for="isAvailable" style="display: inline; font-weight: normal;">Доступен для бронирования</label>
+                </div>
+            </div>
+
+            <button type="submit">Сохранить изменения</button>
+            <button type="button" class="delete-btn" onclick="deleteRoom(${Room.Id}); return false;">
+                Удалить номер
+            </button>
+        </form>
+
+        <a href="/admin/rooms" class="back-link">← Назад к списку номеров</a>
+    </div>
+
+    <script>
+    function deleteRoom(roomId) {
+        if (confirm('Удалить номер ' + roomId + '?')) {
+            fetch('/admin/rooms/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'id=' + roomId
+            })
+            .then(res => {
+                if (res.ok) {
+                    location.href = '/admin/rooms';
+                } else {
+                    return res.text().then(text => { alert('Ошибка: ' + text); });
+                }
+            })
+            .catch(err => {
+                alert('Ошибка сети: ' + err.message);
+            });
+        }
+    }
+    </script>
+</body>
+</html>

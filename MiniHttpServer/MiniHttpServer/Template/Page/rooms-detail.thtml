@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Номер ${Room.RoomType} — ${Room.HotelName}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .room-header h1 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        .room-info p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+        .price {
+            font-size: 20px;
+            color: #28a745;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .booking-form {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .booking-form input {
+            padding: 8px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .booking-form button {
+            padding: 8px 16px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="room-header">
+            <h1>${Room.RoomType}</h1>
+            <p>Отель: ${Room.HotelName}</p>
+        </div>
+
+        <div class="room-info">
+            <p><strong>Цена за ночь:</strong> <span class="price">${Room.PricePerNight} руб.</span></p>
+            <p><strong>Вместимость:</strong> ${Room.Capacity} человек</p>
+            <p><strong>Площадь:</strong> ${Room.Area}</p>
+            <p><strong>Тип кровати:</strong> ${Room.BedType}</p>
+            <p><strong>Удобства:</strong> ${Room.Amenities}</p>
+            <p><strong>Статус:</strong> 
+                $if (Room.IsAvailable)
+                    <span style="color: green;">✅ Доступен</span>
+                $else
+                    <span style="color: red;">❌ Занят</span>
+                $endif
+            </p>
+        </div>
+
+
+        $if (Room.IsAvailable)
+        <div class="booking-form">
+            <h2>Забронировать номер</h2>
+            <form method="post" action="/bookings/create">
+                <input type="hidden" name="RoomId" value="${Room.Id}">
+                <label>
+                    Заезд: <input type="date" name="CheckInDate" required>
+                </label>
+                <label>
+                    Выезд: <input type="date" name="CheckOutDate" required>
+                </label>
+                <button type="submit">Забронировать</button>
+            </form>
+        </div>
+        $endif
+
+
+
+        <a href="/hotels/get/${Room.HotelId}" class="back-link">← Назад к отелю</a>
+    </div>
+</body>
+</html>

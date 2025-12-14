@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Админка</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .menu { margin-bottom: 20px; }
+        .menu a { display: block; margin: 5px 0; color: #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Панель администратора</h1>
+    <div class="menu">
+        <a href="/admin/hotels">🏨 Отели</a>
+        <a href="/admin/rooms">🛏️ Номера</a>
+        <a href="/admin/users">👥 Пользователи</a>
+        <a href="/home/logout" style="color: red;">↪️ Выйти</a>
+    </div>
+</body>
+</html>

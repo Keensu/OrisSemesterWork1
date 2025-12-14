@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВашОтель.RU — Моментальное бронирование гостиниц</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f9e0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+        }
+
+        /* Шапка */
+        header {
+            background: white;
+            border-bottom: 2px solid #ff8c00;
+            padding: 15px 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .header-nav a:hover,
+        .header-nav a.active {
+            background: #ff8c00;
+            color: white;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-greeting {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #333;
+        }
+
+        .btn-logout {
+            padding: 6px 14px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: #c82333;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .search-box {
+            background: #9acd32;
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .search-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group .btn-search {
+            background: #ff8c00;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .form-group .btn-search:hover {
+            background: #e67700;
+        }
+
+        .advantages {
+            margin-top: 30px;
+        }
+
+        .advantages h2 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .advantages ul {
+            list-style: none;
+        }
+
+        .advantages li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .advantages li::before {
+            content: "✓";
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .popular-destinations {
+            margin-top: 30px;
+        }
+
+        .popular-destinations h2 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .destinations-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .destination-item {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .destination-item h3 {
+            color: #007bff;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .destination-item p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .hotels-section {
+            margin-top: 30px;
+        }
+
+        .hotels-section h2 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .hotel-card {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .hotel-image {
+            width: 120px;
+            height: 80px;
+            overflow: hidden;
+            border-radius: 4px;
+            background: #ddd;
+            position: relative;
+        }
+
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .hotel-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .hotel-info {
+            flex: 1;
+        }
+
+        .hotel-info h3 {
+            color: #007bff;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .hotel-info .stars {
+            color: #ffc107;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .hotel-info p {
+            font-size: 13px;
+            color: #666;
+            margin: 3px 0;
+        }
+
+        .hotel-price {
+            text-align: right;
+            font-weight: bold;
+            color: #007bff;
+            font-size: 16px;
+        }
+
+        .hotel-button {
+            background: #9acd32;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .hotel-button:hover {
+            background: #8bbd2f;
+        }
+
+        footer .footer-content {
+            background: #f8f8f8;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .footer-column p {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-column a:hover {
+            text-decoration: underline;
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .country-item {
+            font-size: 12px;
+        }
+
+        .country-item a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .country-item a:hover {
+            text-decoration: underline;
+        }
+
+        .country-item small {
+            color: #666;
+            display: block;
+            font-size: 11px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 15px;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                padding: 15px;
+            }
+
+            .countries-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hotel-card {
+                flex-direction: column;
+            }
+
+            .hotel-image {
+                width: 100%;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .hotel-image {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <span>ВАШ<br>ОТЕЛЬ</span>
+            </div>
+            <nav class="header-nav">
+                <a href="#" class="active">Гостиницы</a>
+                <a href="/Tours/resort.html" class="active">Экскурсии</a>
+                
+            </nav>
+            <div class="header-right">
+                <div class="user-greeting">
+                    $if (IsAuthenticated)
+                        <span>Привет, ${User.UserName}!</span>
+                        <form method="post" action="/home/logout" style="display: inline;">
+                            <button type="submit" class="btn-logout">Выйти</button>
+                        </form>
+                        $if (User.Role == "admin")
+                            <a href="/admin" style="color: white; background: #6c757d; padding: 4px 8px; border-radius: 4px; text-decoration: none; margin-left: 10px;">Админка</a>
+                        $endif
+                    $else
+                        <form method="post" action="/users/authenticate" class="auth-form" style="display: flex; gap: 8px; align-items: center;">
+                            <input type="text" name="UserName" placeholder="Логин" required style="padding: 4px 8px; font-size: 12px;">
+                            <input type="password" name="Password" placeholder="Пароль" required style="padding: 4px 8px; font-size: 12px;">
+                            <button type="submit" style="padding: 4px 8px; font-size: 12px;">Войти</button>
+                        </form>
+                        <div style="margin-top: 5px;">
+                            <a href="/register.html" style="font-size: 12px; color: #28a745;">Регистрация</a>
+                        </div>
+                    $endif
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="main-content">
+
+            
+            <div class="search-box">
+                <h2>Поиск гостиниц</h2>
+                <form method="get" action="/search">
+                    <div class="form-group">
+                        <label>Куда Вы едете?</label>
+                        <input type="text" name="city" placeholder="Город">
+                        <input type="text" name="country" placeholder="Страна">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Сколько звёзд?</label>
+                        <select name="minStars">
+                            <option value="">Любое количество</option>
+                            <option value="2">От 2 звёзд</option>
+                            <option value="3">От 3 звёзд</option>
+                            <option value="4">От 4 звёзд</option>
+                            <option value="5">5 звёзд</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-search">Найти гостиницу!</button>
+                </form>
+            </div>
+
+            <div>
+                <h2>Бронирование гостиниц онлайн по всему миру</h2>
+
+                <div class="hotels-section">
+                    <h2>Гостиницы</h2>
+
+                    $foreach (var hotel in Hotels)
+                    <div class="hotel-card">
+                        <div class="hotel-image">
+                            <img src="/Tours/images/${hotel.MainPhoto}" alt="${hotel.Name}">
+                        </div>
+                        <div class="hotel-info">
+                            <h3>${hotel.Name}</h3>
+                            <div class="stars">⭐ ${hotel.Stars} звёзд</div>
+                            <p>${hotel.City}, ${hotel.Country}</p>
+                            <a href="/hotels/get/${hotel.Id}">Подробнее →</a>
+                        </div>
+                        <div class="hotel-price">
+                            $if (hotel.HasPrice)
+                                ${hotel.MinPrice} ₽
+                            $else
+                                По запросу
+                            $endif
+                        </div>
+                    </div>
+                    $endfor
+
+                </div>
+
+                <div class="advantages">
+                    <h2>Бронируйте через ВашОтель.RU!</h2>
+                    <ul>
+                        <li><strong>Бесплатное бронирование</strong></li>
+                        <li><strong>Моментальное подтверждение</strong></li>
+                        <li><strong>Отсутствие предоплаты</strong></li>
+                        <li><strong>Низкие цены</strong></li>
+                    </ul>
+                </div>
+
+                <div class="popular-destinations">
+                    <h2>Популярные Направления</h2>
+
+                    
+                    $if (ShowMoscowHotels)
+                    <div class="destinations-list">
+                        <div class="destination-item">
+                            <h3>Гостиницы Москвы</h3>
+                            $foreach (var hotel in MoscowHotels)
+                            <div class="hotel-card" style="margin-top: 10px; background: #fff; border: 1px solid #ddd;">
+                                <div class="hotel-image">
+                                    <img src="/Tours/images/${hotel.MainPhoto}" alt="${hotel.Name}">
+                                </div>
+                                <div class="hotel-info">
+                                    <h3><a href="/hotels/get/${hotel.Id}" style="color: #007bff; text-decoration: none;">${hotel.Name}</a></h3>
+                                    <div class="stars">⭐ ${hotel.Stars} звёзд</div>
+                                    <p>${hotel.City}, ${hotel.Country}</p>
+                                </div>
+                                <div class="hotel-price">
+                                    $if (hotel.HasPrice)
+                                        ${hotel.MinPrice} ₽
+                                    $else
+                                        По запросу
+                                    $endif
+                                </div>
+                            </div>
+                            $endfor
+                        </div>
+                    </div>
+                    $endif
+
+                    
+                    $if (ShowSpbHotels)
+                    <div class="destinations-list" style="margin-top: 20px;">
+                        <div class="destination-item">
+                            <h3>Гостиницы Санкт-Петербурга</h3>
+                            $foreach (var hotel in SpbHotels)
+                            <div class="hotel-card" style="margin-top: 10px; background: #fff; border: 1px solid #ddd;">
+                                <div class="hotel-image">
+                                    <img src="/Tours/images/${hotel.MainPhoto}" alt="${hotel.Name}">
+                                </div>
+                                <div class="hotel-info">
+                                    <h3><a href="/hotels/get/${hotel.Id}" style="color: #007bff; text-decoration: none;">${hotel.Name}</a></h3>
+                                    <div class="stars">⭐ ${hotel.Stars} звёзд</div>
+                                    <p>${hotel.City}, ${hotel.Country}</p>
+                                </div>
+                                <div class="hotel-price">
+                                    $if (hotel.HasPrice)
+                                        ${hotel.MinPrice} ₽
+                                    $else
+                                        По запросу
+                                    $endif
+                                </div>
+                            </div>
+                            $endfor
+                        </div>
+                    </div>
+                    $endif
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Основные направления бронирования отелей</h3>
+                <div class="countries-grid">
+                    $foreach (var countryStat in CountryStats)
+                    <div class="country-item">
+                        <a href="/search?country=${countryStat.Name}">${countryStat.Name}</a><br>
+                        <small>${countryStat.HotelCount} гостиниц</small>
+                    </div>
+                    $endfor
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025. ООО "Бронирование отелей". ВашОтель.RU не несёт ответственности за достоверность информации...</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

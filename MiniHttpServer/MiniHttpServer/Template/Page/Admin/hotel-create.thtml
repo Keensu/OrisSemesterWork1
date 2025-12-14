@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить отель</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        form p {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #495057;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добавить отель</h1>
+        <form method="post" action="/admin/hotels/create">
+            <p>
+                <label for="Name">Название:</label>
+                <input type="text" id="Name" name="Name" required>
+            </p>
+            <p>
+                <label for="Description">Описание:</label>
+                <textarea id="Description" name="Description"></textarea>
+            </p>
+            <p>
+                <label for="Address">Адрес:</label>
+                <input type="text" id="Address" name="Address" required>
+            </p>
+            <p>
+                <label for="City">Город:</label>
+                <input type="text" id="City" name="City" required>
+            </p>
+            <p>
+                <label for="Country">Страна:</label>
+                <input type="text" id="Country" name="Country" required>
+            </p>
+            <p>
+                <label for="Phone">Телефон:</label>
+                <input type="tel" id="Phone" name="Phone">
+            </p>
+            <p>
+                <label for="Email">Email:</label>
+                <input type="email" id="Email" name="Email">
+            </p>
+            <p>
+                <label for="Stars">Звёзды:</label>
+                <select id="Stars" name="Stars" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </p>
+            <button type="submit">Создать</button>
+        </form>
+        <a href="/admin/hotels" class="back-link">← Назад к списку</a>
+    </div>
+</body>
+</html>

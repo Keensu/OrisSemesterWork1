@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отели — Админка</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .page-actions {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-actions a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .page-actions a[href="/admin/hotels/create"] {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .page-actions a[href="/admin/hotels/create"]:hover {
+            background-color: #218838;
+        }
+
+        .page-actions a[href="/admin"] {
+            background-color: #40e0d0;
+            color: #000;
+            padding: 8px 20px;
+        }
+
+        .page-actions a[href="/admin"]:hover {
+            background-color: #2fd7c4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f1f3f5;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .actions {
+            white-space: nowrap;
+        }
+
+        .actions a {
+            display: inline-block;
+            margin-right: 12px;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .actions a[href^="/admin/hotels/edit"] {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .actions a[href^="/admin/hotels/edit"]:hover {
+            background-color: #e0a800;
+        }
+
+        .actions a[onclick] {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .actions a[onclick]:hover {
+            background-color: #c82333;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #6c757d;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: #495057;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Отели</h1>
+
+        <div class="page-actions">
+            <a href="/admin/hotels/create">➕ Добавить отель</a>
+            <a href="/admin">Вернуться на главную</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Город</th>
+                    <th>Звёзды</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                $foreach (var hotel in Hotels)
+                <tr>
+                    <td>${hotel.Id}</td>
+                    <td>${hotel.Name}</td>
+                    <td>${hotel.City}</td>
+                    <td>⭐ ${hotel.Stars}</td>
+                    <td class="actions">
+                        <a href="/admin/hotels/edit?id=${hotel.Id}">✏️ Изменить</a>
+                        <a href="#" onclick="deleteHotel(${hotel.Id}, '${hotel.Name}'); return false;">🗑️ Удалить</a>
+                    </td>
+                </tr>
+                $endfor
+            </tbody>
+        </table>
+
+        <a href="/admin" class="back-link">← Назад</a>
+    </div>
+
+    <script>
+        function deleteHotel(hotelId, hotelName) {
+            if (confirm('Удалить отель "' + hotelName + '"? Это действие нельзя отменить.')) {
+                fetch('/admin/hotels/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'id=' + encodeURIComponent(hotelId)
+                })
+                .then(res => {
+                    if (res.ok) {
+                        location.reload();
+                    } else {
+                        return res.json().then(data => {
+                            alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                        }).catch(() => {
+                            return res.text().then(text => {
+                                alert('Ошибка: ' + text);
+                            });
+                        });
+                    }
+                })
+                .catch(err => {
+                    alert('Ошибка сети: ' + err.message);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
