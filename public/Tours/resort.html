@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экскурсии | Наша компания</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a252c);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .country-section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+            .country-section:hover {
+                transform: translateY(-2px);
+            }
+
+        .country-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .hotel-count {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .excursion-list {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+            .excursion-list li {
+                margin-bottom: 0.5rem;
+                color: #2c3e50;
+            }
+
+        .contact {
+            margin-top: 3rem;
+            font-style: italic;
+            text-align: center;
+            color: #555;
+            font-weight: 500;
+            padding: 1.5rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌍 Экскурсии по миру с нашей компанией</h1>
+        <p>Откройте для себя новые культуры, города и приключения!</p>
+    </header>
+
+    <main>
+        <h2>Россия</h2>
+        <div class="country-section">
+            <div class="country-title">Россия</div>
+            <div class="hotel-count">400 гостиниц</div>
+            <ul class="excursion-list">
+                <li>Экскурсия по Красной площади и Кремлю — сердцу Москвы</li>
+                <li>Ночная прогулка по Петербургу с рассказами о тайнах города</li>
+                <li>Поездка в Великий Новгород — древняя столица Руси</li>
+            </ul>
+        </div>
+
+        <h2>Европа</h2>
+        <div class="grid-container">
+            <div class="country-section">
+                <div class="country-title">Италия</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Тур по Риму: Колизей, Ватикан и Пьяцца Навона</li>
+                    <li>Гондолы и маски — вечер в Венеции</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Франция</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Версаль — роскошный дворец королей</li>
+                    <li>Париж с высоты Эйфелевой башни</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Испания</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Барселона: Саграда Фамилия и Парк Гуэль</li>
+                    <li>Фламенко-вечер в Севилье</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Германия</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Замок Нойшванштайн — сказочный замок Баварии</li>
+                    <li>Берлин: Бранденбургские ворота и Музейный остров</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Великобритания</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Лондон: Биг Бен, Тауэр и Лондонский глаз</li>
+                    <li>Экскурсия в Оксфорд — город университетов</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Нидерланды</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Амстердам: каналы, музеи и цветочные рынки</li>
+                    <li>Тюльпановые поля весной — фото-тур</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Азия и Тихоокеанский регион</h2>
+        <div class="grid-container">
+            <div class="country-section">
+                <div class="country-title">Япония</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Токио: Акихабара, Синдзюку и храм Мэйдзи</li>
+                    <li>Киото: сады, храмы и чайные церемонии</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Таиланд</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Бангкок: Храм Изумрудного Будды и плавучие рынки</li>
+                    <li>Пхукет: пляжи, острова и закаты</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Индия</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Тадж-Махал — жемчужина Агры</li>
+                    <li>Дели: старый и новый город за один день</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Вьетнам</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Халонгский залив — круиз среди скал и пещер</li>
+                    <li>Ханой: уличная еда и колониальная архитектура</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Китай</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Великая Китайская стена — одна из 7 чудес света</li>
+                    <li>Шанхай: небоскрёбы и исторический район</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Америка и Африка</h2>
+        <div class="grid-container">
+            <div class="country-section">
+                <div class="country-title">США</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Нью-Йорк: Статуя Свободы и Таймс-сквер</li>
+                    <li>Гранд-Каньон — воздушный тур на вертолёте</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Канада</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Ниагарский водопад — мощь природы</li>
+                    <li>Торонто: CN Tower и парки вдоль озера Онтарио</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Бразилия</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Рио-де-Жанейро: Христос-Искупитель и пляж Копакабана</li>
+                    <li>Амазония — экспедиция в джунгли</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Аргентина</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Буэнос-Айрес: танго, кладбище Рекольта и район Ла Бока</li>
+                    <li>Игуасу — водопады на границе с Бразилией</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Республика Южная Африка</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Кейптаун: Столовая гора и мыс Доброй Надежды</li>
+                    <li>Сафари в национальном парке Крюгер</li>
+                </ul>
+            </div>
+
+            <div class="country-section">
+                <div class="country-title">Мексика</div>
+                <div class="hotel-count">400 гостиниц</div>
+                <ul class="excursion-list">
+                    <li>Канкун: белые пляжи и майяские пирамиды</li>
+                    <li>Мехико: Музей антропологии и Золотой квадрат</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Австралия и Океания</h2>
+        <div class="country-section">
+            <div class="country-title">Австралия</div>
+            <div class="hotel-count">400 гостиниц</div>
+            <ul class="excursion-list">
+                <li>Сидней: Оперный театр и мост Харбор Бридж</li>
+                <li>Великая Барьерная стенка — дайвинг и катер</li>
+                <li>Улуру — священный камень аборигенов</li>
+            </ul>
+        </div>
+
+        <p class="contact">
+            📞 Для бронирования экскурсии уточните информацию по телефону: <strong>+7 (495) 123-45-67</strong><br>
+            Работаем ежедневно с 9:00 до 21:00
+        </p>
+    </main>
+</body>
+</html>
